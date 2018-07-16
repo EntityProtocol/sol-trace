@@ -1,6 +1,6 @@
 {
   "name": "sol-trace-set",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Trace runtime failures for solidity",
   "main": "build/index.js",
   "directories": {
@@ -47,6 +47,7 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
     "ethereumjs-util": "^5.2.0",
     "glob": "^7.1.2"
   }
