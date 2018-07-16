@@ -189,7 +189,7 @@ export default class Web3TraceProvider {
       const artifact = JSON.parse(fs.readFileSync(artifactFileName).toString())
 
       // If the sourcePath starts with zeppelin, then prepend with the pwd and node_modules
-      if (new RegExp('^zeppelin-solidity').test(artifact.sourcePath)) {
+      if (new RegExp('^openzeppelin-solidity').test(artifact.sourcePath)) {
         artifact.sourcePath = process.env.PWD + '/node_modules/' + artifact.sourcePath
       }
 
