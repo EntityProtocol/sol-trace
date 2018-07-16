@@ -1,5 +1,5 @@
 {
-  "name": "sol-trace-set",
+  "name": "sol-trace",
   "version": "0.0.2",
   "description": "Trace runtime failures for solidity",
   "main": "build/index.js",
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/felix2feng/sol-trace.git"
+    "url": "git+https://github.com/EntityProtocol/sol-trace.git"
   },
   "keywords": [
     "ethereum",
     "solidity"
   ],
-  "author": "Felix Feng <felix2feng@gmail.com>",
-  "license": "GPLv3",
-  "homepage": "https://github.com/felix2feng/sol-trace#readme",
+  "author": "Jaynti Kanani <jdkanani@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/EntityProtocol/sol-trace#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
