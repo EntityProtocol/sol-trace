@@ -1,6 +1,7 @@
 import glob from 'glob'
 import fs from 'fs'
 import utils from 'ethereumjs-util'
+import path from 'path'
 
 import { constants, getRevertTrace } from './trace'
 import { parseSourceMap } from './source-maps'
@@ -217,7 +218,11 @@ export default class Web3TraceProvider {
       }
       contractsData.push(contractData)
     })
-    sources = sources.sort((a, b) => parseInt(a.id, 10) - parseInt(b.id, 10))
+
+    // sort by absolute source path. file index for source maps requires that order
+    sources = sources.map((src) => path.resolve(src.sourcePath))
+      .sort((a, b) => a.attr.localeCompare(b.attr))
+
     const sourceCodes = sources.map(source => {
       return fs.readFileSync(source.sourcePath).toString()
     })
