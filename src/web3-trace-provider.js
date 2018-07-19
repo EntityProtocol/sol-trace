@@ -220,8 +220,19 @@ export default class Web3TraceProvider {
     })
 
     // sort by absolute source path. file index for source maps requires that order
-    sources = sources.map((src) => path.resolve(src.sourcePath))
-      .sort((a, b) => a.attr.localeCompare(b.attr))
+    sources = sources.map((src) => {
+      src.sourcePath = path.resolve(src.sourcePath)
+      return src
+    }).sort((a, b) => {
+      // purposely didn't use localeCompare, because the order is incorrect there
+      if (a.sourcePath < b.sourcePath) {
+        return -1
+      } else if (a.sourcePath > b.sourcePath) {
+        return 1
+      } else {
+        return 0
+      }
+    })
 
     const sourceCodes = sources.map(source => {
       return fs.readFileSync(source.sourcePath).toString()

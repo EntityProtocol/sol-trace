@@ -36,6 +36,10 @@ var _ethereumjsUtil = require('ethereumjs-util');
 
 var _ethereumjsUtil2 = _interopRequireDefault(_ethereumjsUtil);
 
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 var _trace = require('./trace');
 
 var _sourceMaps = require('./source-maps');
@@ -334,9 +338,22 @@ var Web3TraceProvider = function () {
         };
         contractsData.push(contractData);
       });
-      sources = sources.sort(function (a, b) {
-        return parseInt(a.id, 10) - parseInt(b.id, 10);
+
+      // sort by absolute source path. file index for source maps requires that order
+      sources = sources.map(function (src) {
+        src.sourcePath = _path2.default.resolve(src.sourcePath);
+        return src;
+      }).sort(function (a, b) {
+        // purposely didn't use localeCompare, because the order is incorrect there
+        if (a.sourcePath < b.sourcePath) {
+          return -1;
+        } else if (a.sourcePath > b.sourcePath) {
+          return 1;
+        } else {
+          return 0;
+        }
       });
+
       var sourceCodes = sources.map(function (source) {
         return _fs2.default.readFileSync(source.sourcePath).toString();
       });
